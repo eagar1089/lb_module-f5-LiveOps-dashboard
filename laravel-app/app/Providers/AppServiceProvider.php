@@ -1,7 +1,8 @@
 <?php
-
 namespace App\Providers;
 
+use App\Services\F5\Contracts\F5ClientInterface;
+use App\Services\F5\Clients\MockF5Client;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +12,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(F5ClientInterface::class, function () {
+        return new MockF5Client();
+        });
     }
 
     /**
